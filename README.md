@@ -1,5 +1,5 @@
 # Stream Buddy - A ZTD Apps Python Project
-A Twitch and YT Live streamer's best friend that plays clips automatically. Stream Buddy was created for my brother (@SteelDrifter) who wanted to create a be right back screen that played his clips automatically while AFK. Stream Buddy accomplishes this by using VLC Media Player with Python bindings and the PyQt GUI framework.
+A Twitch and YT Live streamer's best friend that plays clips automatically. Stream Buddy was created for my brother who wanted to create a be right back screen that played his clips automatically while AFK. Stream Buddy accomplishes this by using VLC Media Player with Python bindings and the PyQt GUI framework.
 
 ## Features
 - Download your top 100 clips quickly and easily.
