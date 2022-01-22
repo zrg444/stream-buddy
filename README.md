@@ -31,6 +31,7 @@ Not tested on Linux... yet! Check out [WineHQ](https://www.winehq.org/). Then ru
 
 ## Known Bugs
 - File count in download folder does not always update on app startup.
+- Some text needs to be fixed in the Feedback window.
 
 ## Planned Features
 Features that from your very own feedback that will be implemented in a future release.
