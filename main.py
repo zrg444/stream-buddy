@@ -11,6 +11,7 @@
 
 from genericpath import exists
 from importlib.resources import path
+from mailbox import mbox
 from random import random
 import sys
 from PyQt5 import QtCore
@@ -35,11 +36,21 @@ from shutil import rmtree
 import ssl
 import smtplib
 import warnings
-import vlc
 from win32gui import DestroyWindow
 from screeninfo import get_monitors
 from mutagen.mp4 import *
-add_dll_directory(r"C:\Program Files\VideoLAN\VLC")
+
+### Checks for a VLC installation, if True, VLC is imported.
+for app in get_installed_software():
+            if app["name"].__contains__("VLC"):
+                vlc_installed = True
+                try:
+                    add_dll_directory(r"C:\Program Files\VideoLAN\VLC")
+                except:
+                    add_dll_directory(r"C:\Program Files (x86)\VideoLAN\VLC")
+                import vlc
+            else:
+                pass
 
 ### Declaring Twitch API variables and settings dict.
 client_id = "TWITCH_CLIENT_ID"
@@ -426,11 +437,17 @@ class play_window(QMainWindow):
         self.setWindowIcon(QIcon(app_icon))
         self.setStyleSheet("color: {}; background-color: {};".format(text_color, background_color))
 
-        player = vlc.Instance()
-        media_player = vlc.MediaListPlayer()
-        py2 = vlc.MediaPlayer()
-        self.media_list = player.media_list_new()
-        self.list_creator()
+        try:
+            player = vlc.Instance()
+            media_player = vlc.MediaListPlayer()
+            py2 = vlc.MediaPlayer()
+            self.media_list = player.media_list_new()
+            self.list_creator()
+        except:
+            mbox = QMessageBox.critical(self, "Crtical Error!", """
+Could not start VLC Media Player!
+Try restarting Stream Buddy and checking your VLC installation.
+If you still have an error, use the Feedback feature to send a message""")
 
 ### Creates media playlist based on user settings of the loop_clips and
 # random_clips variables. Sets the created list into the instance of
@@ -596,9 +613,9 @@ class feedback_window(QWidget):
         warnings.simplefilter("ignore")
         port = 587
         smtp_server = "smtp.gmail.com"
-        sender_email = "EMAIL"
-        recieve_email = "EMAIL"
-        password = "APP-PASSCODE"
+        sender_email = "SENDER_EMAIL"
+        recieve_email = "SENDER_EMAIL"
+        password = "APP_PASSWORD"
 
         subject = self.subject_input.text()
         message = self.body_input.toPlainText()
