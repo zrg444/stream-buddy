@@ -33,6 +33,9 @@ Not tested on Linux... yet! Check out [WineHQ](https://www.winehq.org/). Then ru
 - File count in download folder does not always update on app startup.
 - Some text needs to be fixed in the Feedback window.
 
+## Code Fixes
+- Remove windows as global variables for more efficent code.
+
 ## Planned Features
 Features that from your very own feedback that will be implemented in a future release.
 - Select Download Quality of Clips
