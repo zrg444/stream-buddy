@@ -29,14 +29,16 @@ Not tested on MacOS... yet! Check out [WineHQ](https://www.winehq.org/). Then ru
 ### Linux
 Not tested on Linux... yet! Check out [WineHQ](https://www.winehq.org/). Then run the installer and using the Windows 10 method.
 
-## Known Bugs
+## Future Release Notes
+
+### Known Bugs
 - File count in download folder does not always update on app startup.
 - Some text needs to be fixed in the Feedback window.
 
-## Code Fixes
+### Code Fixes
 - Remove windows as global variables for more efficent code.
 
-## Planned Features
+### Planned Features
 Features that from your very own feedback that will be implemented in a future release.
 - Select Download Quality of Clips
 
