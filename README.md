@@ -36,6 +36,7 @@ Not tested on Linux... yet! Check out [WineHQ](https://www.winehq.org/). Then ru
 
 ### Code Fixes
 - Remove windows as global variables for more efficent code.
+- Remove unused imports.
 
 ### Planned Features
 Features that from your very own feedback that will be implemented in a future release.
