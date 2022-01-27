@@ -33,7 +33,6 @@ Not tested on Linux... yet! Check out [WineHQ](https://www.winehq.org/). Then ru
 
 ### Known Bugs
 - File count in download folder does not always update on app startup.
-- Some text needs to be fixed in the Feedback window.
 
 ### Code Fixes
 - Remove windows as global variables for more efficent code.
@@ -52,6 +51,12 @@ Comments, improvements, and feature requests are always appreciated. To submit f
 Love what I'm doing? Click [here](https://www.paypal.com/donate/?hosted_button_id=272K99TCEWJCJ) to support my work. Thanks! :D
 
 ## Releases
+
+### v1.1.0
+- Fixed error where clips would fail to download from user created list.
+- Fixed clip location reset button to save default location.
+- Removed unecessary code when downloading clips.
+- Fixed text in Feedback window.
 
 ### v1.0.0
 Initial release of Stream Buddy.
