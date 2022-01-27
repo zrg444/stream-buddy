@@ -53,8 +53,8 @@ for app in get_installed_software():
                 pass
 
 ### Declaring Twitch API variables and settings dict.
-client_id = "yaoela7u57wifm4kom77dfsi7ki8nj"
-client_secret = "bwkl2lzihxbj6dmma2v5n6h4hpov10"
+client_id = "TWITCH_CLIENT_ID"
+client_secret = "TWITCH_CLIENT_SECRET"
 settings = {}
 
 ### Window hex values, may add more customization in the future.
@@ -613,9 +613,9 @@ class feedback_window(QWidget):
         warnings.simplefilter("ignore")
         port = 587
         smtp_server = "smtp.gmail.com"
-        sender_email = "ztdapps@zachgoreczny.com"
-        recieve_email = "ztdapps@zachgoreczny.com"
-        password = "rwyothjxwyhkfpjp"
+        sender_email = "SENDER_EMAIL"
+        recieve_email = "RECIEVEING_EMAIL"
+        password = "APP_PASSCODE"
 
         subject = self.subject_input.text()
         message = self.body_input.toPlainText()
