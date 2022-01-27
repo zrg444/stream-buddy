@@ -53,8 +53,8 @@ for app in get_installed_software():
                 pass
 
 ### Declaring Twitch API variables and settings dict.
-client_id = "TWITCH_CLIENT_ID"
-client_secret = "TWITCH_CLIENT_SECRET"
+client_id = "yaoela7u57wifm4kom77dfsi7ki8nj"
+client_secret = "bwkl2lzihxbj6dmma2v5n6h4hpov10"
 settings = {}
 
 ### Window hex values, may add more customization in the future.
@@ -345,7 +345,7 @@ class Window(QWidget):
             pbar.setValue(pb_status)
             status_text.setText("Downloading clip {} of {}...".format(percent,numclips_count))
         except:
-            status_text.setText("All selected clips have been downloaded. Check your clips folder.")
+            status_text.setText("The clips you selected have already been downloaded.\nCheck your clips folder.")
 
     def finished_downloading(self):
         if len(accounts_list) == 0:
@@ -358,7 +358,7 @@ class Window(QWidget):
                 pass
             else:
                 if numclips_count == 0:
-                    status_text.setText("All selected clips have been downloaded. Check your clips folder.")
+                    status_text.setText("The clips you selected have already been downloaded.\nCheck your clips folder.")
                     pbar.hide()
                     dl_list.clear()
                     self.stop_button.hide()
@@ -563,7 +563,7 @@ class feedback_window(QWidget):
         self.subject_input.setPlaceholderText("Subject")
 
         self.body_input = QTextEdit()
-        self.body_input.setPlaceholderText("Use this space for comments, suggestions, and ways I can improve Classix!")
+        self.body_input.setPlaceholderText("Use this space for comments, suggestions, and ways I can improve Stream Buddy!")
 
         send_button = QPushButton("Send Feedback")
         send_button.setStyleSheet("""QPushButton{color: #11052C; background-color: #BDBDBD;
@@ -613,9 +613,9 @@ class feedback_window(QWidget):
         warnings.simplefilter("ignore")
         port = 587
         smtp_server = "smtp.gmail.com"
-        sender_email = "SENDER_EMAIL"
-        recieve_email = "SENDER_EMAIL"
-        password = "APP_PASSWORD"
+        sender_email = "ztdapps@zachgoreczny.com"
+        recieve_email = "ztdapps@zachgoreczny.com"
+        password = "rwyothjxwyhkfpjp"
 
         subject = self.subject_input.text()
         message = self.body_input.toPlainText()
@@ -736,7 +736,7 @@ class list_window(QWidget):
             pbar.setValue(pb_status)
             status_text.setText("Downloading clip {} of {}...".format(percent,numclips_count))
         except:
-            status_text.setText("All selected clips have been downloaded. Check your clips folder.")
+            status_text.setText("The clips you selected have already been downloaded.\nCheck your clips folder.")
 
     def finished_downloading(self):
         if len(dl_list) == 0:
@@ -746,7 +746,7 @@ class list_window(QWidget):
             self.dlthread.quit()
         else:
             if numclips_count == 0:
-                status_text.setText("All selected clips have been downloaded. Check your clips folder.")
+                status_text.setText("The clips you selected have already been downloaded.\nCheck your clips folder.")
                 pbar.hide()
                 dl_list.clear()
                 self.dlthread.quit()
@@ -1320,7 +1320,7 @@ NOTE: Clicking the button below does not update Stream Buddy. This will only upd
                                     QPushButton:hover{background-color: #FFFFFF; font-weight: 900;}""")
         donate_button.clicked.connect(self.donations)
 
-        version_text = QLabel("Stream Buddy v1.0.0 - ZTD Apps")
+        version_text = QLabel("Stream Buddy v1.1.0 - ZTD Apps")
 
         layout.addWidget(update_label)
         layout.addWidget(wdupdate_text)
@@ -1343,7 +1343,7 @@ NOTE: Clicking the button below does not update Stream Buddy. This will only upd
         global overlay_pos, controller_pos
         overlay_pos = "100,100"
         controller_pos = "100,100"
-        mbox = QMessageBox.information(self, "Overlay and Controller Reset!", "Overlay and controller window positions reset!\nYou should be able to find them after next restart.")
+        self.save_settings()
 
     def donations(self):
         system("start https://www.paypal.com/donate/?hosted_button_id=272K99TCEWJCJ")
@@ -1515,8 +1515,7 @@ NOTE: Clicking the button below does not update Stream Buddy. This will only upd
 
     def close_win(self):
         self.close()
-        mbox = QMessageBox()
-        mbox.information(self, "Restart Stream Buddy!", "In order for changes to take effect, make sure to restart Stream Buddy!")
+        mbox = QMessageBox.information(self, "Restart Stream Buddy!", "In order for changes to take effect, make sure to restart Stream Buddy!")
 
 ### The QThread class that connects to download buttons in Stream Buddy.
 # Based on the window this is called from, either the top 100 most viewed
@@ -1657,17 +1656,18 @@ class clip_downloader(QThread):
                     except:
                         driver = webdriver.Firefox(options=doptions)
                             
-                driver.set_window_position(-4000,-4000)
                         
                 for item in dl_list:
-                    url = item.split("/")
-                    url_string = (url[5]).split("?")
-                    vid_id = url_string[0]
+                    if item.__contains__("?"):
+                        url = item.split("/")
+                        url_string = (url[5]).split("?")
+                        vid_id = url_string[0]
+                    else:
+                        vid_id = item
                     if (vid_id not in curr_clips):
                         numclips_count = 1 + numclips_count
                     else:
                         pass
-
                     if dcode == 1:
                         break
                     self.send_progress.emit(clip_num)
@@ -1707,7 +1707,7 @@ class clip_downloader(QThread):
                 self.dfinished.emit()
                 driver.close()
         except:            
-            status_text.setText("Please select a valid output folder to download clips.")      
+            status_text.setText("Could not download clips. Please update Webdrivers in Settings or check the documentation by clicking Help!")      
 
 ### The PyQT main loop. This checks to see if the save_loc var is a
 # blank string. If TRUE, the app will run the VLC setup prompt.
